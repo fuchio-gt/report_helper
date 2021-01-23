@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "dependencies": {
-    "textlint": "^11.8.1"
+  "dependencies": {},
+  "devDependencies": {
+    "countable": "^3.0.1",
+    "express": "^4.17.1",
+    "textlint": "^11.8.1",
+    "textlint-rule-preset-japanese": "^5.0.0"
   }
 }
