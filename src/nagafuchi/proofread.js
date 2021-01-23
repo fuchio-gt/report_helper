@@ -33,24 +33,27 @@ app.post('/webhook', (req, res) => {
 const client = new line.Client(config);
 
 const handleEvent = async (event) => {
-    const req_text = event.message.text;
-    const lengthArray = countWords(req_text);
-    const engine = new TextLintEngine();
-    const reply = await engine.executeOnText(req_text);
-    const messageArray =  reply[0].messages.map(v => `${v.line}行目に、${v.message}。`) ;
-
     if (event.type !== 'message' || event.message.type !== 'text') {
+        console.log(event)
         return Promise.resolve(null);
     }
-    return client.replyMessage(event.replyToken, [{
-        type: 'text',
-        text: `単語数：${lengthArray[0]}
+    else{
+        const req_text = event.message.text;
+        const lengthArray = countWords(req_text);
+        const engine = new TextLintEngine();
+        const reply = await engine.executeOnText(req_text);
+        const messageArray =  reply[0].messages.map(v => `${v.line}行目に、${v.message}。`) ;
+        console.log(reply[0].messages)
+        return client.replyMessage(event.replyToken, [{
+            type: 'text',
+            text: `単語数：${lengthArray[0]}
 文字数(空白あり)：${lengthArray[1]}
 文字数(空白無し)：${lengthArray[2]}`,
-    }, {
-        type: 'text',
-        text: (reply[0].messages.length==0) ? '見ればわかる。至高の領域に近い。':messageArray.join('\n')
-    }])
+        }, {
+            type: 'text',
+            text: (reply[0].messages.length==0) ? '見ればわかる。至高の領域に近い。':messageArray.join('\n')
+        }])
+    }
 }
 
 app.listen(PORT);
