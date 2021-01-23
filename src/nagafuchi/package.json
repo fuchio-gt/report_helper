@@ -1,0 +1,9 @@
+{
+  "name": "nagafuchi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "textlint": "^11.8.1"
+  }
+}
