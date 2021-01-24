@@ -1,11 +1,22 @@
+import sys
 import cv2
 from PIL import Image
+import base64
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
+from io import BytesIO
 
 import numpy as np
 
-frame = cv2.imread('sample.jpg').copy()
+img_base64 = sys.stdin.readline()
+# frame = cv2.imread('sample.jpg').copy()
+# nodeからbase64で画像を取得
+img_binary = base64.b64decode(img_base64)
+jpg=np.frombuffer(img_binary,dtype=np.uint8)
+
+#raw image <- jpg
+frame = cv2.imdecode(jpg, cv2.IMREAD_COLOR)
+
 
 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 ret, th = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
@@ -30,7 +41,6 @@ epsilon = 0.1*cv2.arcLength(cnt, True)
 approx = cv2.approxPolyDP(cnt, epsilon, True)
 # areas.append(approx)
 
-print(approx)
 # img_contour = cv2.drawContours(frame, areas, -1,(255,0,0),3)
 img_contour = cv2.drawContours(frame, [approx], -1, (255, 0, 0), 3)
 
@@ -60,7 +70,7 @@ cv2.imwrite('./test.jpg', dst)
 # # グリッドの表示をOFFにする
 # plt.axis('off')
 
-plt.imshow(dst)
+# plt.imshow(dst)
 # plt.show()
 
 pil_image = cv2.cvtColor(dst, cv2.COLOR_BGR2RGB)
@@ -71,3 +81,4 @@ out_file = 'test.pdf'
 
 pil_image.save(out_file)
 
+print(out_file)

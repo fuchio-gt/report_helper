@@ -84,6 +84,11 @@ cookie@0.4.0:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.0.tgz#beb437e7022b3b6d49019d088665303ebe9c14ba"
   integrity sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==
 
+date-utils@^1.2.21:
+  version "1.2.21"
+  resolved "https://registry.yarnpkg.com/date-utils/-/date-utils-1.2.21.tgz#61fb16cdc1274b3c9acaaffe9fc69df8720a2b64"
+  integrity sha1-YfsWzcEnSzyayq/+n8ad+HIKK2Q=
+
 debug@2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -295,6 +300,11 @@ node-fetch@^2.6.1:
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
 
+node-uuid@^1.4.8:
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.8.tgz#b040eb0923968afabf8d32fb1f17f1167fdab907"
+  integrity sha1-sEDrCSOWivq/jTL7HxfxFn/auQc=
+
 on-finished@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"
@@ -334,6 +344,11 @@ proxy-addr@~2.0.5:
   dependencies:
     forwarded "~0.1.2"
     ipaddr.js "1.9.1"
+
+python-shell@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/python-shell/-/python-shell-2.0.3.tgz#03040cae27934d88e1226fd34316b39dfb2fddf0"
+  integrity sha512-SBYQzXjexcxmmgzpjdIVxum9tj4Zaov1jNuSGMLssPxRhZ7lxqlpuEtLT0TEed0RAqhGfx2YFVC+imCJOmkVHg==
 
 qs@6.7.0:
   version "6.7.0"
