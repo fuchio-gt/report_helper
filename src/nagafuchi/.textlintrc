@@ -1,6 +1,9 @@
 {
-  "filters": {},
   "rules": {
-    "preset-japanese": true
+    "preset-ja-technical-writing": {
+      "ja-no-mixed-period":{
+        "allowPeriodMarks": ["．"]
+      }
+    }
   }
 }
