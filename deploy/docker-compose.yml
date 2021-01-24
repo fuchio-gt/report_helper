@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    # image: node:lts # バージョン指定も可能 ex. node:12.16.1
+    container_name: report-helper
+    tty: true
+    volumes:
+      - ./src:/src
+    # working_dir: "/src"
+    ports:
+      - '3000:3000' 

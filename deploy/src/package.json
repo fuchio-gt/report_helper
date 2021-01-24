@@ -1,0 +1,18 @@
+{
+  "name": "report-helper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@line/bot-sdk": "^7.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "node-uuid": "^1.4.8",
+    "labelmake": "^2.0.13",
+    "textlint": "^11.8.1",
+    "textlint-rule-preset-japanese": "^5.0.0"
+  }
+}

@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const line = require('@line/bot-sdk');
 const pdfmaker = require('./pdfmaker');
-const { PythonShell } = require('python-shell');
-
 
 const PORT = 3000;
 const config = {
@@ -36,48 +34,17 @@ app.post('/webhook', (req, res) => {
 
 const client = new line.Client(config);
 
-const getContent = (messageId) => {
-    return client.getMessageContent(messageId)
-      .then((stream) => new Promise((resolve, reject) => {
-        // const writable = fs.createWriteStream(downloadPath);
-        // stream.pipe(writable);
-        // stream.on('end', () => resolve(downloadPath));
-        stream.on('data', chunk => resolve(new Buffer(chunk).toString('base64')));
-        stream.on('error', reject);
-    }));
-}
-
 const handleEvent = async (event) => {
-    // if (event.type !== 'message' || event.message.type !== 'text') {
-    if (event.type !== 'message') {
-        // メッセージじゃなかったとき
+    if (event.type !== 'message' || event.message.type !== 'text') {
         console.log(event)
         return Promise.resolve(null);
     }
-    else if(event.message.type == 'image'){
-        // 画像をPDFにする
-        const content = await getContent(event.message.id);
-        const pyshell = new PythonShell('warp.py');
-        // base64エンコードしたデータを送る
-        pyshell.send(content);
-        pyshell.on('message', (path) => {
-            console.log(path);
-        });
-    }
     else if(event.message.type == 'text' && event.message.text.split('\n')[0] == 'check'){
-        // 文章校正
         const req_text = event.message.text;
         const lengthArray = countWords(req_text);
         const engine = new TextLintEngine();
         const reply = await engine.executeOnText(req_text);
-        const errorMessages = {
-            'ja-technical-writing/sentence-length': '一つの文が100文字を超えています',
-            'ja-technical-writing/max-ten': '一つの文で"、"を3つ以上使用しています',
-            'ja-technical-writing/no-nfd': '濁点がおかしくなっています',
-            'ja-technical-writing/no-invalid-control-character': '不要な制御文字があります',
-            'ja-technical-writing/no-exclamation-question-mark': '感嘆符があります',
-        }
-        const messageArray =  reply[0].messages.map(v => `${v.line}行目で、${(errorMessages[v.ruleId]) ? errorMessages[v.ruleId]:v.message}。`) ;
+        const messageArray =  reply[0].messages.map(v => `${v.line}行目に、${v.message}。`) ;
         console.log(reply[0].messages)
         return client.replyMessage(event.replyToken, [{
             type: 'text',
@@ -90,7 +57,6 @@ const handleEvent = async (event) => {
         }])
     }
     else if (event.message.type == 'text' && event.message.text.split('\n')[0] == 'make') {
-        // 送られたテキストをPDFにする
         // メッセージを改行で配列にする
         const message = event.message.text.split('\n');
         const title = message[1];
